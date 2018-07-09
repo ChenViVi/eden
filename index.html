@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>This is me</title>
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <link rel="stylesheet" href="css/materialize.min.css">
+  <script src="js/materialize.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+    crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    .tabs .indicator {
+      background-color: #ffffff;
+    }
+  </style>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $(".button-collapse").sideNav();
+      $.ajax({
+        url: "https://api.github.com/repos/ChenViVi/me/issues",
+        type: "get",
+        dataType: 'json',
+        data: ("milestone=1"),
+        async: false,
+        success: function (response) {
+          var article_content = $('#article-content');
+          for (var i = 0; i < response.length; i++) {
+            var article = response[i];
+            var updated_date = article.updated_at.split("T");
+            article_content.append(
+              '<div class="card hoverable z-depth-2 col s12">' +
+              '<div class="card-content white-text">' +
+              '<a href="article.html" class="card-title pink-text accent-1">' + article.title + '</a>' +
+              '<p class="grey-text text-darken-2">' + updated_date[0] + " " + updated_date[1].substring(0,updated_date[1].length-1) + '</p>' +
+              '</div>' +
+              '<div class="card-action" data-id="' + article.id + '">' +
+              '</div>' +
+              '</div>'
+            );
+            var labels = article.labels;
+            var labels_content = $('.card-action[data-id=' + article.id + ']');
+            for (var j = 0; j < labels.length; j++)
+              labels_content.append('<div class="chip">' + labels[j].name + '</div>');
+          }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          Materialize.toast("未知错误", 3000);
+        }
+      });
+    });
+  </script>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper pink accent-1">
+          <a href="#!" class="brand-logo">&nbsp;&nbsp;This is me</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse">
+            <i class="material-icons">menu</i>
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <li class="active">
+              <a href="index.html">
+                <i class="material-icons left">home</i>主页</a>
+            </li>
+            <li>
+              <a href="bibi.html">
+                <i class="material-icons left">send</i>说说</a>
+            </li>
+            <li>
+              <a href="code.html">
+                <i class="material-icons left">code</i>项目</a>
+            </li>
+            <li>
+              <a href="music.html">
+                <i class="material-icons left">library_music</i>音乐</a>
+            </li>
+            <li>
+              <a href="game.html">
+                <i class="material-icons left">games</i>游戏</a>
+            </li>
+            <li>
+              <a href="about.html">
+                <i class="material-icons left">info</i>了解我</a>
+            </li>
+            <li>
+              <a href="friends.html">
+                <i class="material-icons left">mood</i>友链</a>
+            </li>
+          </ul>
+          <ul class="side-nav" id="mobile-demo">
+            <li class="active">
+              <a href="index.html">
+                <i class="material-icons left">home</i>主页</a>
+            </li>
+            <li>
+              <a href="bibi.html">
+                <i class="material-icons left">send</i>说说</a>
+            </li>
+            <li>
+              <a href="code.html">
+                <i class="material-icons left">code</i>项目</a>
+            </li>
+            <li>
+              <a href="music.html">
+                <i class="material-icons left">library_music</i>音乐</a>
+            </li>
+            <li>
+              <a href="game.html">
+                <i class="material-icons left">games</i>游戏</a>
+            </li>
+            <li>
+              <a href="about.html">
+                <i class="material-icons left">info</i>了解我</a>
+            </li>
+            <li>
+              <a href="friends.html">
+                <i class="material-icons left">mood</i>友链</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  <div id="article-content" class="row" style="margin-top:20px;margin-left: 20%;margin-right: 20%;"></div>
+</body>
+
+</html>
