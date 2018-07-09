@@ -4,6 +4,10 @@
 
 使用 Github Issue 搭建博客，开发中...
 
+[http://me.valorachen.top/](http://me.valorachen.top/)
+
+![](http://img.valorachen.top/18-7-9/12844252.jpg)
+
 ## 出发点
 
 目前的博客平台其实很多了，他们对于手机的支持性不够好，唯一有手机端的就是 WordPress。但是 WordPress在手机端只能写文章，这对我来说是不够用的，我有很多自定义内容需要加载，像是发表下自己的感受，或者记录自己爱听的音乐、追过的番剧、玩过的游戏和拍过的照片……不太爱拍可能没几张照片 ORZ 
