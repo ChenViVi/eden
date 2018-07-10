@@ -27,15 +27,17 @@
     }
   </style>
   <script type="text/javascript">
+    var user_name = 'ChenViVi';
+    var repos_name = 'me';
     $(document).ready(function () {
       var article_list = $('#article-list');
       var article_content = $('#article-list');
       $(".button-collapse").sideNav();
       $.ajax({
-        url: "https://api.github.com/repos/ChenViVi/me/issues",
+        url: "https://api.github.com/repos/" + user_name + "/" + repos_name + "/issues",
         type: "get",
         dataType: 'json',
-        data: ("milestone=1"),
+        data: ("milestone=1" + "&creator=" + user_name + "&state=open"),
         async: false,
         success: function (response) {
           for (var i = 0; i < response.length; i++) {
