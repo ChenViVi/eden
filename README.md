@@ -2,11 +2,19 @@
 
 ## 这是个啥
 
-使用 Github Issue 搭建博客，开发中...
+使用 Github Issue 搭建博客，目前什么都没做好，开发中...
+
+### Web端
 
 [http://me.valorachen.top/](http://me.valorachen.top/)
 
 ![](http://img.valorachen.top/18-7-10/74595056.jpg)
+
+### Android端
+
+项目地址：[https://github.com/ChenViVi/me-android](https://github.com/ChenViVi/me-android)
+
+![](http://img.valorachen.top/18-7-11/69488601.jpg)
 
 ## 出发点
 
