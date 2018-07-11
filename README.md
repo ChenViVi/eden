@@ -1,4 +1,4 @@
-# me
+# eden
 
 ## 这是个啥
 
@@ -6,13 +6,13 @@
 
 ### Web端
 
-[http://me.valorachen.top/](http://me.valorachen.top/)
+[http://eden.valorachen.top/](http://eden.valorachen.top/)
 
 ![](http://img.valorachen.top/18-7-10/74595056.jpg)
 
 ### Android端
 
-项目地址：[https://github.com/ChenViVi/me-android](https://github.com/ChenViVi/me-android)
+项目地址：[https://github.com/ChenViVi/eden-android](https://github.com/ChenViVi/eden-android)
 
 ![](http://img.valorachen.top/18-7-11/69488601.jpg)
 
@@ -46,3 +46,7 @@
 2. 动态的内容支持文字、图片、音频和视频：用七牛云吧
 3. 复制网易云中的分享链接到 App 中自动识别是否要分享此歌曲
 4. 回复评论：什么？居然有人看了还评论了
+
+### iOS 端
+
+什么？我有钱用屁股手机了
