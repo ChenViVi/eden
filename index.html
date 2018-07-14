@@ -55,6 +55,8 @@
     var repos_name = 'eden';
     var page = 1;
     var page_size = 10;
+    var articles = new Map();
+    var converter = new showdown.Converter();
     var article_list;
     var article_content;
     $(document).ready(function () {
@@ -73,12 +75,13 @@
         success: function (response) {
           for (var i = 0; i < response.length; i++) {
             var article = response[i];
+            articles.set(article.number, article);
             var created_at = article.updated_at.split("T");
             var updated_date = article.updated_at.split("T");
             article_list.append(
               '<div class="card hoverable z-depth-2 col s12">' +
               '<div class="card-content white-text">' +
-              '<a href="#article' + article.id + '" class="card-title pink-text accent-1 article-title truncate" data-number="' + article.number + '">' + article.title + '</a>' +
+              '<a href="#article' + article.id + '" class="card-title pink-text accent-1 article-title truncate" data-number="' + article.number + '" onclick=load_content(' + article.number + ')>' + article.title + '</a>' +
               '<p class="grey-text text-darken-2">' + '创建时间：' + created_at[0] + " " + created_at[1].substring(0, created_at[1].length - 1) + '</p>' +
               '<p class="grey-text text-darken-2">' + '修改时间：' + updated_date[0] + " " + updated_date[1].substring(0, updated_date[1].length - 1) + '</p>' +
               '</div>' +
@@ -91,43 +94,32 @@
             for (var j = 0; j < labels.length; j++)
               labels_content.append('<div class="chip" style="background-color:#' + labels[j].color + ';color:#ffffff">' + labels[j].name + '</div>');
           }
-          $('.article-title').click(function () {
-            $.ajax({
-              url: "https://api.github.com/repos/ChenViVi/me/issues/" + $(this).attr('data-number'),
-              type: "get",
-              dataType: 'json',
-              success: function (response) {
-                var converter = new showdown.Converter();
-                var html = converter.makeHtml(response.body);
-                $('.container').html(
-                  '<div class="card-panel row" id="article-content">' +
-                  converter.makeHtml(response.body) +
-                  '</div>'
-                );
-                $('img').addClass('col s12');
-                $('h1').addClass('col s12');
-                $('h2').addClass('col s12');
-                $('h3').addClass('col s12');
-                $('h4').addClass('col s12');
-                $('h5').addClass('col s12');
-                $('p').addClass('col s12');
-                $('pre').addClass('col s12');
-                $('code').addClass('col s12');
-                $('blockquote').addClass('col s12');
-                $('pre code').each(function (i, block) {
-                  hljs.highlightBlock(block);
-                });
-              },
-              error: function (jqXHR, textStatus, errorThrown) {
-                Materialize.toast("未知错误", 3000);
-              }
-            });
-          });
           page++;
         },
         error: function (jqXHR, textStatus, errorThrown) {
           Materialize.toast("未知错误", 3000);
         }
+      });
+    }
+
+    function load_content(number) {
+      $('.container').html(
+        '<div class="card-panel row" id="article-content">' +
+        converter.makeHtml(articles.get(number).body) +
+        '</div>'
+      );
+      $('img').addClass('col s12');
+      $('h1').addClass('col s12');
+      $('h2').addClass('col s12');
+      $('h3').addClass('col s12');
+      $('h4').addClass('col s12');
+      $('h5').addClass('col s12');
+      $('p').addClass('col s12');
+      $('pre').addClass('col s12');
+      $('code').addClass('col s12');
+      $('blockquote').addClass('col s12');
+      $('pre code').each(function (i, block) {
+        hljs.highlightBlock(block);
       });
     }
   </script>
