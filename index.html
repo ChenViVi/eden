@@ -25,6 +25,25 @@
     h5 {
       color: rgb(255, 128, 171)
     }
+
+    h1 {
+      font-size: 3.2rem;
+    }
+    h2 {
+      font-size: 2.56rem;
+    }
+    h3 {
+      font-size: 2.02rem;
+    }
+    h4 {
+      font-size: 1.58rem;
+    }
+    h5 {
+      font-size: 1.24rem;
+    }
+    h6 {
+      font-size: 1rem;
+    }
   </style>
   <script type="text/javascript">
     var user_name = 'ChenViVi';
@@ -42,12 +61,14 @@
         success: function (response) {
           for (var i = 0; i < response.length; i++) {
             var article = response[i];
+            var created_at = article.updated_at.split("T");
             var updated_date = article.updated_at.split("T");
             article_list.append(
               '<div class="card hoverable z-depth-2 col s12">' +
               '<div class="card-content white-text">' +
-              '<a href="#article' + article.id + '" class="card-title pink-text accent-1 article-title" data-number="' + article.number + '">' + article.title + '</a>' +
-              '<p class="grey-text text-darken-2">' + updated_date[0] + " " + updated_date[1].substring(0, updated_date[1].length - 1) + '</p>' +
+              '<a href="#article' + article.id + '" class="card-title pink-text accent-1 article-title truncate" data-number="' + article.number + '">' + article.title + '</a>' +
+              '<p class="grey-text text-darken-2">' + '创建时间：'+ created_at[0] + " " + created_at[1].substring(0, created_at[1].length - 1) + '</p>' +
+              '<p class="grey-text text-darken-2">' + '修改时间：' + updated_date[0] + " " + updated_date[1].substring(0, updated_date[1].length - 1) + '</p>' +
               '</div>' +
               '<div class="card-action" data-id="' + article.id + '">' +
               '</div>' +
