@@ -29,18 +29,23 @@
     h1 {
       font-size: 3.2rem;
     }
+
     h2 {
       font-size: 2.56rem;
     }
+
     h3 {
       font-size: 2.02rem;
     }
+
     h4 {
       font-size: 1.58rem;
     }
+
     h5 {
       font-size: 1.24rem;
     }
+
     h6 {
       font-size: 1rem;
     }
@@ -48,6 +53,8 @@
   <script type="text/javascript">
     var user_name = 'ChenViVi';
     var repos_name = 'eden';
+    var page = 1;
+    var page_size = 10;
     $(document).ready(function () {
       var article_list = $('#article-list');
       var article_content = $('#article-list');
@@ -56,7 +63,7 @@
         url: "https://api.github.com/repos/" + user_name + "/" + repos_name + "/issues",
         type: "get",
         dataType: 'json',
-        data: ("milestone=1" + "&creator=" + user_name + "&state=open"),
+        data: ("milestone=1" + "&creator=" + user_name + "&state=open" + "&page=" + page + "&per_page=" + page_size),
         async: false,
         success: function (response) {
           for (var i = 0; i < response.length; i++) {
@@ -67,7 +74,7 @@
               '<div class="card hoverable z-depth-2 col s12">' +
               '<div class="card-content white-text">' +
               '<a href="#article' + article.id + '" class="card-title pink-text accent-1 article-title truncate" data-number="' + article.number + '">' + article.title + '</a>' +
-              '<p class="grey-text text-darken-2">' + '创建时间：'+ created_at[0] + " " + created_at[1].substring(0, created_at[1].length - 1) + '</p>' +
+              '<p class="grey-text text-darken-2">' + '创建时间：' + created_at[0] + " " + created_at[1].substring(0, created_at[1].length - 1) + '</p>' +
               '<p class="grey-text text-darken-2">' + '修改时间：' + updated_date[0] + " " + updated_date[1].substring(0, updated_date[1].length - 1) + '</p>' +
               '</div>' +
               '<div class="card-action" data-id="' + article.id + '">' +
@@ -111,10 +118,78 @@
               }
             });
           });
+          page++;
         },
         error: function (jqXHR, textStatus, errorThrown) {
           Materialize.toast("未知错误", 3000);
         }
+      });
+      $('#btn-load-more').click(function () {
+        $.ajax({
+        url: "https://api.github.com/repos/" + user_name + "/" + repos_name + "/issues",
+        type: "get",
+        dataType: 'json',
+        data: ("milestone=1" + "&creator=" + user_name + "&state=open" + "&page=" + page + "&per_page=" + page_size),
+        async: false,
+        success: function (response) {
+          for (var i = 0; i < response.length; i++) {
+            var article = response[i];
+            var created_at = article.updated_at.split("T");
+            var updated_date = article.updated_at.split("T");
+            article_list.append(
+              '<div class="card hoverable z-depth-2 col s12">' +
+              '<div class="card-content white-text">' +
+              '<a href="#article' + article.id + '" class="card-title pink-text accent-1 article-title truncate" data-number="' + article.number + '">' + article.title + '</a>' +
+              '<p class="grey-text text-darken-2">' + '创建时间：' + created_at[0] + " " + created_at[1].substring(0, created_at[1].length - 1) + '</p>' +
+              '<p class="grey-text text-darken-2">' + '修改时间：' + updated_date[0] + " " + updated_date[1].substring(0, updated_date[1].length - 1) + '</p>' +
+              '</div>' +
+              '<div class="card-action" data-id="' + article.id + '">' +
+              '</div>' +
+              '</div>'
+            );
+            var labels = article.labels;
+            var labels_content = $('.card-action[data-id=' + article.id + ']');
+            for (var j = 0; j < labels.length; j++)
+              labels_content.append('<div class="chip" style="background-color:#' + labels[j].color + ';color:#ffffff">' + labels[j].name + '</div>');
+          }
+          $('.article-title').click(function () {
+            $.ajax({
+              url: "https://api.github.com/repos/ChenViVi/me/issues/" + $(this).attr('data-number'),
+              type: "get",
+              dataType: 'json',
+              success: function (response) {
+                var converter = new showdown.Converter();
+                var html = converter.makeHtml(response.body);
+                $('.container').html(
+                  '<div class="card-panel row" id="article-content">' +
+                  converter.makeHtml(response.body) +
+                  '</div>'
+                );
+                $('img').addClass('col s12');
+                $('h1').addClass('col s12');
+                $('h2').addClass('col s12');
+                $('h3').addClass('col s12');
+                $('h4').addClass('col s12');
+                $('h5').addClass('col s12');
+                $('p').addClass('col s12');
+                $('pre').addClass('col s12');
+                $('code').addClass('col s12');
+                $('blockquote').addClass('col s12');
+                $('pre code').each(function (i, block) {
+                  hljs.highlightBlock(block);
+                });
+              },
+              error: function (jqXHR, textStatus, errorThrown) {
+                Materialize.toast("未知错误", 3000);
+              }
+            });
+          });
+          page++;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          Materialize.toast("未知错误", 3000);
+        }
+      });
       });
     });
   </script>
@@ -191,6 +266,9 @@
   </nav>
   <div class="container">
     <div id="article-list" class="row"></div>
+    <div class="row center" style="margin-bottom: 20px;">
+      <a id="btn-load-more" class="waves-effect waves-light btn  pink accent-1" onclick="load_more">加载更多</a>
+    </div>
   </div>
 </body>
 
