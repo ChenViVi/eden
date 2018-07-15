@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Eden</title>
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <link rel="stylesheet" href="css/materialize.min.css">
+  <script src="js/materialize.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+    crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/showdown/1.5.0/showdown.min.js"></script>
+  <link rel="stylesheet" href="css/default.css">
+  <script src="js/highlight.pack.js"></script>
+  <link rel="stylesheet" href="http://downland.valorachen.top/gitment.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+  <style>
+    .tabs .indicator {
+      background-color: #ffffff;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      color: rgb(255, 128, 171);
+    }
+
+    h1 {
+      font-size: 3.2rem;
+    }
+
+    h2 {
+      font-size: 2.56rem;
+    }
+
+    h3 {
+      font-size: 2.02rem;
+    }
+
+    h4 {
+      font-size: 1.58rem;
+    }
+
+    h5 {
+      font-size: 1.24rem;
+    }
+
+    h6 {
+      font-size: 1rem;
+    }
+  </style>
+  <script type="text/javascript">
+    var user_name = 'ChenViVi';
+    var repos_name = 'eden';
+    var access_token = 'ec2a936bb52af1e7510ad241874207a23f4dd1d7'
+    var page = 1;
+    var page_size = 10;
+    var client_id = '7806cf101f835fa53876';
+    var client_secret = 'e934a83086472a5beff2546430260fe2281bde3d';
+    var converter = new showdown.Converter();
+    var article_list;
+    var article_content;
+    $(document).ready(function () {
+      article_list = $('#article-list');
+      article_content = $('#article-list');
+      $(".button-collapse").sideNav();
+      load_content();
+    });
+
+    function load_content() {
+      $.ajax({
+        url: "https://api.github.com/repos/" + user_name + "/" + repos_name + "/issues",
+        type: "get",
+        dataType: 'json',
+        headers: {
+          Authorization: "token " + access_token
+        },
+        data: ("milestone=5" + "&creator=" + user_name + "&state=open"),
+        async: false,
+        success: function (response) {
+          var article = response[0];
+          $('.container').html(
+            '<div class="card-panel row" id="article-content">' +
+            converter.makeHtml(article.body) +
+            '</div>' +
+            '<div id="comments"></div>'
+          );
+          var gitment = new Gitment({
+            id: article.node_id,
+            owner: user_name,
+            repo: repos_name,
+            oauth: {
+              client_id: client_id,
+              client_secret: client_secret,
+            },
+          });
+          gitment.render('comments');
+          $('pre code').each(function (i, block) {
+            hljs.highlightBlock(block);
+          });
+          $('img').addClass('col s12');
+          $('h1').addClass('col s12');
+          $('h2').addClass('col s12');
+          $('h3').addClass('col s12');
+          $('h4').addClass('col s12');
+          $('h5').addClass('col s12');
+          $('p').addClass('col s12');
+          $('pre').addClass('col s12');
+          $('code').addClass('col s12');
+          $('blockquote').addClass('col s12');
+          $('pre code').each(function (i, block) {
+            hljs.highlightBlock(block);
+          });
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          Materialize.toast("未知错误", 3000);
+        }
+      });
+    }
+  </script>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-wrapper pink accent-1">
+      <a href="#!" class="brand-logo">&nbsp;&nbsp;Eden</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+      <ul class="right hide-on-med-and-down">
+        <li>
+          <a href="index.html">
+            <i class="material-icons left">home</i>主页</a>
+        </li>
+        <li>
+          <a href="bibi.html">
+            <i class="material-icons left">send</i>动态</a>
+        </li>
+        <li>
+          <a href="code.html">
+            <i class="material-icons left">code</i>项目</a>
+        </li>
+        <li>
+          <a href="music.html">
+            <i class="material-icons left">library_music</i>音乐</a>
+        </li>
+        <li>
+          <a href="game.html">
+            <i class="material-icons left">games</i>游戏</a>
+        </li>
+        <li>
+          <a class="active" href="about.html">
+            <i class="material-icons left">info</i>了解我</a>
+        </li>
+        <li>
+          <a href="friends.html">
+            <i class="material-icons left">mood</i>友链</a>
+        </li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li class="active">
+          <a href="index.html">
+            <i class="material-icons left">home</i>主页</a>
+        </li>
+        <li>
+          <a href="bibi.html">
+            <i class="material-icons left">send</i>动态</a>
+        </li>
+        <li>
+          <a href="code.html">
+            <i class="material-icons left">code</i>项目</a>
+        </li>
+        <li>
+          <a href="music.html">
+            <i class="material-icons left">library_music</i>音乐</a>
+        </li>
+        <li>
+          <a href="game.html">
+            <i class="material-icons left">games</i>游戏</a>
+        </li>
+        <li>
+          <a href="about.html">
+            <i class="material-icons left">info</i>了解我</a>
+        </li>
+        <li>
+          <a href="friends.html">
+            <i class="material-icons left">mood</i>友链</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <div id="article-list" class="row"></div>
+  </div>
+</body>
+
+</html>
