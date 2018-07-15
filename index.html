@@ -13,6 +13,8 @@
   <script src="https://cdn.bootcss.com/showdown/1.5.0/showdown.min.js"></script>
   <link rel="stylesheet" href="css/default.css">
   <script src="js/highlight.pack.js"></script>
+  <link rel="stylesheet" href="http://downland.valorachen.top/gitment.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
   <style>
     .tabs .indicator {
       background-color: #ffffff;
@@ -23,7 +25,7 @@
     h3,
     h4,
     h5 {
-      color: rgb(255, 128, 171)
+      color: rgb(255, 128, 171);
     }
 
     h1 {
@@ -53,8 +55,11 @@
   <script type="text/javascript">
     var user_name = 'ChenViVi';
     var repos_name = 'eden';
+    var access_token = 'ec2a936bb52af1e7510ad241874207a23f4dd1d7'
     var page = 1;
     var page_size = 10;
+    var client_id = '7806cf101f835fa53876';
+    var client_secret = 'e934a83086472a5beff2546430260fe2281bde3d';
     var articles = new Map();
     var converter = new showdown.Converter();
     var article_list;
@@ -70,6 +75,9 @@
         url: "https://api.github.com/repos/" + user_name + "/" + repos_name + "/issues",
         type: "get",
         dataType: 'json',
+        headers: {
+          Authorization: "token " + access_token
+        },
         data: ("milestone=1" + "&creator=" + user_name + "&state=open" + "&page=" + page + "&per_page=" + page_size),
         async: false,
         success: function (response) {
@@ -103,11 +111,27 @@
     }
 
     function load_content(number) {
+      var article = articles.get(number);
       $('.container').html(
         '<div class="card-panel row" id="article-content">' +
-        converter.makeHtml(articles.get(number).body) +
-        '</div>'
+        converter.makeHtml(article.body) +
+        '</div>' +
+        '<div id="comments"></div>'
       );
+      var gitment = new Gitment({
+        id: article.node_id,
+        owner: user_name,
+        repo: repos_name,
+        oauth: {
+          client_id: client_id,
+          client_secret: client_secret,
+        },
+      });
+      gitment.init();
+      gitment.render('comments');
+      $('pre code').each(function (i, block) {
+        hljs.highlightBlock(block);
+      });
       $('img').addClass('col s12');
       $('h1').addClass('col s12');
       $('h2').addClass('col s12');
