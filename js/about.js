@@ -112,9 +112,9 @@ $(document).ready(function() {
 			else if (args == '-skills'){
 				terminal.append(
 					"Android----从整个大学四年一直玩到现在，水平海渴溢？\n\n" +
-					"HTML-------不愿意学任何框架只用 jQuery 做点小东西的懒人，偶尔抄下模板，逛逛 opencode\n\n" +
+					"HTML-------不愿意学任何框架只用 jQuery 做点小东西的懒人，偶尔抄下模板，逛逛 codepen\n\n" +
 					"Java-------用 SSH 写过 API 和网站，不考虑并发没有安全性可言那种\n\n" +
-					"Php--------人家才不会去拍黄片呢，讨厌~\n\n" +
+					"PHP--------人家才不会去拍黄片呢，讨厌~\n\n" +
 					"Linux------用 Linux 当平时使用的操作系统这种事情已经放弃了，平时也就买点 vps，然后放着吃灰\n"
 				);
 			}
