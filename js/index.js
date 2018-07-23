@@ -16,11 +16,11 @@ $(document).ready(function () {
   container = $('#container');
   pagination = $('#pagination');
   $(".button-collapse").sideNav();
-  load(false);
+  load_list();
   write_list(1);
   var pre_page = page;
   while (true) {
-    load(false);
+    load_list();
     if (pre_page == page) break;
     pre_page = page;
   }
@@ -31,7 +31,7 @@ $(document).ready(function () {
 
 function load_pagination() {
   if (articles_length == 0) {
-    container.html('<h1 class="center">啥鸡掰都没有</h1>');
+    container.html('<h1 class="center">什么都没写</h1>');
   }
   else {
     pagination.html('');
@@ -100,7 +100,7 @@ function write_list(page){
   current_page = page;
 }
 
-function load(async) {
+function load_list() {
   $.ajax({
     url: "https://api.github.com/repos/" + user_name + "/" + repos_name + "/issues",
     type: "get",
@@ -109,7 +109,7 @@ function load(async) {
       Authorization: "token " + access_token
     },
     data: ("milestone=1" + "&creator=" + user_name + "&state=open" + "&page=" + page + "&per_page=" + page_size),
-    async: async,
+    async: false,
     success: function (response) {
       var length = response.length;
       if (length > 0) {
