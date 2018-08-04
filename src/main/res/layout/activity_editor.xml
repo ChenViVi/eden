@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@mipmap/btn_back"
+            android:onClick="onClickBack" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:gravity="center"
+            android:text="编辑视频"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@mipmap/btn_next"
+            android:onClick="onSaveEdit" />
+    </LinearLayout>
+
+    <com.qiniu.pili.droid.shortvideo.demo.view.SquareRelativeLayout
+        android:id="@+id/preview_wrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_layout">
+
+        <com.qiniu.pili.droid.shortvideo.demo.view.SquareGLSurfaceView
+            android:id="@+id/preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageButton
+            android:id="@+id/pause_playback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/preview"
+            android:layout_alignEnd="@id/preview"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#0000"
+            android:onClick="onClickTogglePlayback"
+            android:src="@mipmap/btn_pause" />
+
+        <com.qiniu.pili.droid.shortvideo.demo.view.FrameListView
+            android:id="@+id/frame_list_view"
+            android:layout_width="match_parent"
+            android:layout_alignTop="@id/preview"
+            android:layout_height="wrap_content">
+
+        </com.qiniu.pili.droid.shortvideo.demo.view.FrameListView>
+
+        <LinearLayout
+            android:id="@+id/speed_panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/preview"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:background="@drawable/speed_panel"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/super_slow_speed_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="onSpeedClicked"
+                android:padding="7dp"
+                android:text="@string/speed_super_slow"
+                android:textColor="@color/speedTextNormal"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/slow_speed_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="onSpeedClicked"
+                android:padding="7dp"
+                android:text="@string/speed_slow"
+                android:textColor="@color/speedTextNormal"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/normal_speed_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="onSpeedClicked"
+                android:padding="7dp"
+                android:text="@string/speed_normal"
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/fast_speed_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="onSpeedClicked"
+                android:padding="7dp"
+                android:text="@string/speed_fast"
+                android:textColor="@color/speedTextNormal"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/super_fast_speed_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="onSpeedClicked"
+                android:padding="7dp"
+                android:text="@string/speed_super_fast"
+                android:textColor="@color/speedTextNormal"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </com.qiniu.pili.droid.shortvideo.demo.view.SquareRelativeLayout>
+
+
+    <com.qiniu.pili.droid.shortvideo.demo.view.TextSelectorPanel
+        android:id="@+id/text_selector_panel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <com.qiniu.pili.droid.shortvideo.demo.view.PaintSelectorPanel
+        android:id="@+id/paint_selector_panel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"></com.qiniu.pili.droid.shortvideo.demo.view.PaintSelectorPanel>
+
+    <LinearLayout
+        android:id="@+id/editing_panel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/filters_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_text_view"
+                android:clickable="true"
+                android:onClick="onClickShowFilters"
+                android:paddingBottom="5dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="5dp"
+                android:text="滤镜"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/mvs_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/border_text_view"
+                android:clickable="true"
+                android:onClick="onClickShowMVs"
+                android:paddingBottom="5dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="5dp"
+                android:text="MV"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/paint_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/border_text_view"
+                android:clickable="true"
+                android:onClick="onClickShowPaint"
+                android:paddingBottom="5dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="5dp"
+                android:text="涂鸦"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/image_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/border_text_view"
+                android:clickable="true"
+                android:onClick="onClickShowImages"
+                android:paddingBottom="5dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="5dp"
+                android:text="贴图"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/speed_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/border_text_view"
+                android:clickable="true"
+                android:onClick="onClickShowSpeed"
+                android:paddingBottom="5dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="5dp"
+                android:text="变速"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <com.qiniu.pili.droid.shortvideo.demo.view.ImageSelectorPanel
+            android:id="@+id/image_selector_panel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@android:color/background_dark"
+            android:visibility="gone"></com.qiniu.pili.droid.shortvideo.demo.view.ImageSelectorPanel>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@android:color/background_dark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/mix_audio_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#000"
+                android:onClick="onClickMix"
+                android:src="@mipmap/btn_mix_audio" />
+
+            <ImageButton
+                android:id="@+id/mix_audio_setting_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#000"
+                android:onClick="onClickAudioMixSetting"
+                android:src="@mipmap/btn_set_volume" />
+
+            <ImageButton
+                android:id="@+id/reset_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#000"
+                android:onClick="onClickReset"
+                android:src="@mipmap/btn_reset" />
+
+            <ImageButton
+                android:id="@+id/mute_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#000"
+                android:onClick="onClickMute" />
+
+            <ImageButton
+                android:id="@+id/toggle_watermark_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#000"
+                android:onClick="onClickToggleWatermark"
+                android:src="@mipmap/btn_watermark" />
+
+            <ImageButton
+                android:id="@+id/text_select_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#000"
+                android:onClick="onClickTextSelect"
+                android:src="@mipmap/btn_add_text" />
+
+            <ImageButton
+                android:id="@+id/audio_dub_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#000"
+                android:onClick="onClickDubAudio"
+                android:src="@mipmap/btn_dub" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

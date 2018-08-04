@@ -104,6 +104,11 @@
     line-height: $button-floating-size;
   }
 
+  &:hover {
+    background-color: $button-floating-background-hover;
+    @extend .z-depth-1-half;
+  }
+
   &:before {
     border-radius: 0;
   }
@@ -236,6 +241,21 @@ button.btn-floating {
   color: $button-flat-color;
   cursor: pointer;
   transition: background-color .2s;
+
+  &:focus,
+  &:active {
+    background-color: transparent;
+  }
+
+  &:focus,
+  &:hover {
+    background-color: rgba(0,0,0,.1);
+    box-shadow: none;
+  }
+
+  &:active {
+    background-color: rgba(0,0,0,.2);
+  }
 
   &.disabled {
     background-color: transparent !important;

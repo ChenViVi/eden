@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false">
+
+    <android.opengl.GLSurfaceView
+        android:id="@+id/preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipChildren="false">
+
+        <com.qiniu.pili.droid.shortvideo.demo.view.FocusIndicator
+            android:id="@+id/focus_indicator"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="15dp">
+
+        <ImageView
+            android:id="@+id/screen_rotate_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:clickable="true"
+            android:onClick="onScreenRotation"
+            android:src="@mipmap/btn_screen_rotation" />
+
+        <ImageView
+            android:id="@+id/capture_frame_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:clickable="true"
+            android:onClick="onCaptureFrame"
+            android:src="@drawable/btn_capture_frame" />
+
+        <ImageView
+            android:id="@+id/switch_camera"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:onClick="onClickSwitchCamera"
+            android:src="@drawable/btn_switch_camera" />
+
+        <ImageView
+            android:id="@+id/switch_flash"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:onClick="onClickSwitchFlash"
+            android:src="@drawable/btn_flash_selector"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <com.qiniu.pili.droid.shortvideo.demo.view.SectionProgressBar
+        android:id="@+id/record_progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_alignParentBottom="true" />
+
+    <LinearLayout
+        android:id="@+id/brightness_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/adjust_brightness_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:onClick="onClickBrightness"
+            android:src="@mipmap/btn_brightness" />
+
+        <com.qiniu.pili.droid.shortvideo.demo.view.VerticalSeekBar
+            android:id="@+id/adjust_brightness"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/record_progressbar"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/speed_panel"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/super_slow_speed_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="onSpeedClicked"
+            android:padding="7dp"
+            android:text="@string/speed_super_slow"
+            android:textColor="@color/speedTextNormal"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/slow_speed_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="onSpeedClicked"
+            android:padding="7dp"
+            android:text="@string/speed_slow"
+            android:textColor="@color/speedTextNormal"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/normal_speed_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="onSpeedClicked"
+            android:padding="7dp"
+            android:text="@string/speed_normal"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/fast_speed_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="onSpeedClicked"
+            android:padding="7dp"
+            android:text="@string/speed_fast"
+            android:textColor="@color/speedTextNormal"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/super_fast_speed_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:onClick="onSpeedClicked"
+            android:padding="7dp"
+            android:text="@string/speed_super_fast"
+            android:textColor="@color/speedTextNormal"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/btns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/bottom_control_panel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/concat"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/btn_concat"
+                android:clickable="true"
+                android:onClick="onClickConcat" />
+
+            <ImageView
+                android:id="@+id/record"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:src="@drawable/btn_record" />
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_delete"
+                android:clickable="true"
+                android:onClick="onClickDelete" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/video_record_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="onClickCapture"
+            android:text="@string/title_record" />
+
+        <Button
+            android:id="@+id/audio_record_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="onClickAudioCapture"
+            android:text="@string/title_audio_record" />
+
+        <Button
+            android:id="@+id/video_trim_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="onClickImport"
+            android:text="@string/title_trim" />
+
+        <Button
+            android:id="@+id/video_transcode_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="onClickTranscode"
+            android:text="@string/title_transcode" />
+
+        <Button
+            android:id="@+id/gif_make_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="onClickMakeGIF"
+            android:text="@string/title_gif" />
+
+        <Button
+            android:id="@+id/screen_record_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="onClickScreenRecord"
+            android:text="@string/title_screen_record" />
+
+        <Button
+            android:id="@+id/video_compose_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="onClickVideoCompose"
+            android:text="@string/title_compose" />
+
+        <Button
+            android:id="@+id/image_compose_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="onClickImageCompose"
+            android:text="@string/title_image_compose" />
+
+        <Button
+            android:id="@+id/ar_make_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="onClickAR"
+            android:text="@string/title_ar_effect" />
+
+        <Button
+            android:id="@+id/draft_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="onClickDraftBox"
+            android:text="@string/title_from_draft_box" />
+
+        <Button
+            android:id="@+id/video_divide_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="onClickTransitionMake"
+            android:text="@string/title_video_divide" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="录制参数配置"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="预览比例"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/PreviewSizeRatioSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="预览尺寸"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/PreviewSizeLevelSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="音频声道"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/AudioChannelNumSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="编码类型"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/EncodingModeLevelSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="编码尺寸"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/EncodingSizeLevelSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="编码码率"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/EncodingBitrateLevelSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000" />
+
+        <TextView
+            android:id="@+id/VersionInfoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp" />
+
+    </LinearLayout>
+</ScrollView>

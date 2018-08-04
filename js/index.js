@@ -158,6 +158,7 @@ function load_content(number) {
   $('code').addClass('col s12');
   $('blockquote').addClass('col s12');
   $('a').addClass('col s12');
+  $('ul').addClass('col s12');
   $('pre code').each(function (i, block) {
     hljs.highlightBlock(block);
   });
