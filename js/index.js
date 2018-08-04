@@ -4,6 +4,7 @@ var articles_length = 0;
 var current_page_size = 0;
 var articles = new Array(0);
 var converter = new showdown.Converter();
+var body;
 var article_list;
 var article_content;
 var container;
@@ -15,6 +16,7 @@ $(document).ready(function () {
   load_more_btn = $('#load-more-btn');
   container = $('#container');
   pagination = $('#pagination');
+  body = $('html,body');
   $(".button-collapse").sideNav();
   load_list();
   write_list(1);
@@ -27,6 +29,9 @@ $(document).ready(function () {
   articles_length = articles.length;
   current_page_size = Math.ceil(articles_length / 10);
   load_pagination();
+  $("#btn-top").click(function(){
+    body.animate({ scrollTop: 0 }, 500);
+  });
 });
 
 function load_pagination() {
@@ -127,6 +132,7 @@ function load_list() {
 }
 
 function load_content(number) {
+  body.animate({ scrollTop: 0 }, 500);
   var article = articles[number];
   $('.container').html(
     '<div class="card-panel row" id="article-content">' +
